@@ -1,0 +1,87 @@
+:root {
+  --zd-primary-clr: #001e43;
+  --zd-secondary-clr: #ff993b;
+  --zd-dark-clr: #1b1b1b;
+  --zd-light-clr: #dfe3e4;
+
+  --zd-navbar-toggler-glow: rgba(255, 153, 59, 0.6);
+  --zd-navbar-toggler-color: #ff993b;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+/* START: nav bar overrides */
+#main-nav {
+  background-color: var(--zd-primary-clr);
+}
+
+#main-nav button {
+  border-color: var(--zd-secondary-clr);
+}
+
+.navbar-toggler {
+  color: var(--zd-navbar-toggler-glow);
+}
+
+.navbar-toggler-icon-zd {
+  color: var(--zd-navbar-toggler-color);
+  font-size: 1.5rem;
+}
+
+/* END: nav bar overrides */
+
+/* START: Footer styles */
+footer {
+  background-color: var(--zd-primary-clr);
+  color: var(--zd-light-clr);
+}
+
+.socialicons {
+  font-size: 2rem;
+  padding-left: .5rem;
+  color: var(--zd-light-clr);
+}
+
+.socialicons:hover {
+  color: var(--zd-secondary-clr);
+}
+
+/* END: Footer styles */
+
+
+/* START: Main Content Styles */
+.app-logo {
+  max-width: 400px;
+}
+
+.checklist {
+  list-style: none;
+}
+
+.checklist>li i {
+  color: var(--zd-secondary-clr);
+  padding-right: 0.5rem-;
+}
+
+.devicons {
+  font-size: 4rem;
+  padding-left: 0.5rem;
+}
+
+/* END: Main Content Styles */
