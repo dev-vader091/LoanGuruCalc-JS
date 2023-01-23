@@ -52,15 +52,6 @@ function calculateLoan(amount, term, rate) {
     
   }
 
-  // let loan = {
-  //   month: term,
-  //   payment: totalMonthlyPayment,
-  //   principal: principalPayment,
-  //   interest: interestPayment,
-  //   interestTotal: totalInterest,
-  //   balance: currentBalance
-  // }
-
   displayLoanTable(loanArray);
   
 }
