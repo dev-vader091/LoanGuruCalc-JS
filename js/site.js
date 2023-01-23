@@ -131,7 +131,5 @@ function validateInputs(amount, term, rate) {
     // term = parseInt(term);
     // rate = parseFloat(rate);
     // calculateLoan(amount, term, rate);
-  }
- 
-  
+  } 
 }
