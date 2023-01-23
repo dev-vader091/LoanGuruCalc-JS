@@ -7,15 +7,19 @@ function getValues() {
   // validate user inputs
   validateInputs(loanAmountInput, loanTermInput, loanRateInput);
   
+  let amount = parseInt(loanAmountInput);
+  let term = parseInt(loanTermInput);
+  let rate = parseFloat(loanRateInput);
 
+  let loan = calculateLoan(amount, term, rate);
+  
+  displayLoanTable(loan);
 }
 
 // logic function
 function calculateLoan(amount, term, rate) {
   let currentBalance = amount;
-  // rate = rate / 1200;
   let totalMonthlyPayment = ((amount) * (rate / 1200)) / (1-(1 + rate / 1200) ** -term);
-  // let totalMonthlyPayment;
   let interestPayment;
   let principalPayment;
   let totalInterest = 0;
@@ -36,7 +40,6 @@ function calculateLoan(amount, term, rate) {
 
 
     loanStats = {
-    // interestAmt: amount * rate,
     month: currentMonth,
     payment: totalMonthlyPayment,
     principal: principalPayment,
@@ -45,22 +48,19 @@ function calculateLoan(amount, term, rate) {
     balance: currentBalance,
     totalPrincipal: amount,
     total: totalCost
-
     }
 
     loanArray.push(loanStats)
-    
   }
 
-  displayLoanTable(loanArray);
-  
+  return loanArray;
+  // displayLoanTable(loanArray);
 }
 
 // view function
 function displayLoanTable(loanArray) {
   let loanTable = document.getElementById('calcTable');
   const tableRowTemplate = document.getElementById('tableRowTemplate');
-  console.log(loanArray);
   let currentMonth;
   // Format the price above to USD using the locale, style, and currency.
   let USDollar = new Intl.NumberFormat('en-US', {
@@ -85,11 +85,8 @@ function displayLoanTable(loanArray) {
     tableCells[5].innerHTML = USDollar.format(currentMonth.balance);
 
     loanTable.appendChild(loanRow);
-
   }
 
-  
-  
   // display table with calculation results
   document.getElementById('loanSummary').classList.add('active');
   document.getElementById('tableContainer').classList.add('active');
@@ -97,8 +94,6 @@ function displayLoanTable(loanArray) {
   document.getElementById('totalPrincipalAmount'). innerHTML = USDollar.format(currentMonth.totalPrincipal);
   document.getElementById('totalInterestAmount'). innerHTML = USDollar.format(currentMonth.interestTotal);
   document.getElementById('totalCost'). innerHTML = USDollar.format(currentMonth.total);
-
-  
 }
 
 // validation function
@@ -131,10 +126,11 @@ function validateInputs(amount, term, rate) {
         )
   }
   else {
-    amount = parseInt(amount);
-    term = parseInt(term);
-    rate = parseFloat(rate);
-    calculateLoan(amount, term, rate);
+    return amount, term, rate;
+    // amount = parseInt(amount);
+    // term = parseInt(term);
+    // rate = parseFloat(rate);
+    // calculateLoan(amount, term, rate);
   }
  
   
