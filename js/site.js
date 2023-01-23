@@ -71,32 +71,42 @@ function displayLoanTable(loanArray) {
   const tableRowTemplate = document.getElementById('tableRowTemplate');
   console.log(loanArray);
   let currentMonth;
+  // Format the price above to USD using the locale, style, and currency.
+  let USDollar = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 
   loanTable.innerHTML = '';
   // create table row from template
   for(i = 0; i < loanArray.length; i++) {
     let loanRow = document.importNode(tableRowTemplate.content, true);
     currentMonth = loanArray[i];
-
+    
     let tableCells = loanRow.querySelectorAll('td');
     console.log(loanRow);
 
     tableCells[0].innerHTML = currentMonth.month;
-    tableCells[1].innerHTML = currentMonth.payment;
-    tableCells[2].innerHTML = currentMonth.principal;
-    tableCells[3].innerHTML = currentMonth.interest;
-    tableCells[4].innerHTML = currentMonth.interestTotal;
-    tableCells[5].innerHTML = currentMonth.balance;
+    tableCells[1].innerHTML = USDollar.format(currentMonth.payment);
+    tableCells[2].innerHTML = USDollar.format(currentMonth.principal);
+    tableCells[3].innerHTML = USDollar.format(currentMonth.interest);
+    tableCells[4].innerHTML = USDollar.format( currentMonth.interestTotal);
+    tableCells[5].innerHTML = USDollar.format(currentMonth.balance);
 
     loanTable.appendChild(loanRow);
 
   }
 
-  document.getElementById('monthlyPayment').innerHTML = currentMonth.payment;
-  document.getElementById('totalPrincipalAmount'). innerHTML = currentMonth.totalPrincipal;
-  document.getElementById('totalInterestAmount'). innerHTML = currentMonth.interestTotal;
-  document.getElementById('totalCost'). innerHTML = currentMonth.total;
+  
+  
   // display table with calculation results
+  document.getElementById('loanSummary').classList.add('active');
+  document.getElementById('tableContainer').classList.add('active');
+  document.getElementById('monthlyPayment').innerHTML = USDollar.format(currentMonth.payment);
+  document.getElementById('totalPrincipalAmount'). innerHTML = USDollar.format(currentMonth.totalPrincipal);
+  document.getElementById('totalInterestAmount'). innerHTML = USDollar.format(currentMonth.interestTotal);
+  document.getElementById('totalCost'). innerHTML = USDollar.format(currentMonth.total);
+
   
 }
 

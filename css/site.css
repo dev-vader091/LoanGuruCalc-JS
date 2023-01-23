@@ -84,4 +84,8 @@ footer {
   padding-left: 0.5rem;
 }
 
+#loanSummary.active {
+  visibility: visible !important;
+}
+
 /* END: Main Content Styles */
