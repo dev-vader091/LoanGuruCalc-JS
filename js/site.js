@@ -32,14 +32,14 @@ function calculateLoan(amount, term, rate) {
     if (totalMonthlyPayment > currentBalance) {
       totalMonthlyPayment = currentBalance + interestPayment;
     }
-    
     principalPayment = totalMonthlyPayment - interestPayment;
+    
     totalInterest += interestPayment;
     currentBalance -= principalPayment;
     let totalCost = amount + totalInterest;
 
 
-    loanStats = {
+    let loanStats = {
     month: currentMonth,
     payment: totalMonthlyPayment,
     principal: principalPayment,
