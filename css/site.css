@@ -1,11 +1,12 @@
 :root {
-  --zd-primary-clr: #001e43;
-  --zd-secondary-clr: #ff993b;
-  --zd-dark-clr: #1b1b1b;
-  --zd-light-clr: #dfe3e4;
+  --zd-primary-clr: #767b91;
+  --zd-secondary-clr: #c7ccdb;
+  --zd-dark-clr: #2a324b;
+  --zd-light-clr: #e1e5ee;
+  --zd-highlight-clr: #f7c59f;
 
-  --zd-navbar-toggler-glow: rgba(255, 153, 59, 0.6);
-  --zd-navbar-toggler-color: #ff993b;
+  --zd-nav-toggler-clr: var(--zd-highlight-clr);
+  --zd-nav-toggler-glow: rgba(247, 197, 159, 0.55);
 }
 
 html,
@@ -28,19 +29,19 @@ footer {
 
 /* START: nav bar overrides */
 #main-nav {
-  background-color: var(--zd-primary-clr);
+  background-color: var(--zd-dark-clr);
 }
 
 #main-nav button {
-  border-color: var(--zd-secondary-clr);
+  border-color: var(--zd-highlight-clr);
 }
 
 .navbar-toggler {
-  color: var(--zd-navbar-toggler-glow);
+  color: var(--zd-nav-toggler-glow);
 }
 
 .navbar-toggler-icon-zd {
-  color: var(--zd-navbar-toggler-color);
+  color: var(--zd-nav-toggler-color);
   font-size: 1.5rem;
 }
 
@@ -49,7 +50,7 @@ footer {
 
 /* START: Footer styles */
 footer {
-  background-color: var(--zd-primary-clr);
+  background-color: var(--zd-dark-clr);
   color: var(--zd-light-clr);
 }
 
@@ -60,7 +61,7 @@ footer {
 }
 
 .socialicons:hover {
-  color: var(--zd-secondary-clr);
+  color: var(--zd-primary-clr);
 }
 
 /* END: Footer styles */
@@ -87,6 +88,16 @@ footer {
 
 #loanSummary.active {
   visibility: visible !important;
+}
+
+.cta-btn {
+  color: var(--zd-dark-clr) !important;
+  border-color: var(--zd-dark-clr) !important;
+}
+
+.cta-btn:hover {
+  background: var(--zd-dark-clr) !important;
+  color: var(--zd-light-clr) !important;
 }
 
 /* END: Main Content Styles */
