@@ -5,15 +5,29 @@ function getValues() {
   let loanTermInput = document.querySelector('#loanTermInput').value;
   let loanRateInput = document.querySelector('#loanRateInput').value;
   // function validate user inputs ran immediately after receiving inputs
-  validateInputs(loanAmountInput, loanTermInput, loanRateInput);
+  let loanValues = validateInputs(loanAmountInput, loanTermInput, loanRateInput);
   // validated inputs are then parsed into numbers to be used 
   // as parameters for calculate function
-  let amount = parseInt(loanAmountInput);
-  let term = parseInt(loanTermInput);
-  let rate = parseFloat(loanRateInput);
+  // let amount = parseInt(loanAmountInput);
+  // let term = parseInt(loanTermInput);
+  // let rate = parseFloat(loanRateInput);
+  let loan;
+  
   // create a value to hold the array returned in the calculate function
   // will be used as the parameter in the display function
-  let loan = calculateLoan(amount, term, rate);
+  if (loanValues.amount == "" || loanValues.term == "" || loanValues.rate == "") {
+    Swal.fire(
+      {
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please enter a valid loan info.',
+    }
+    )
+    
+  }
+  else {
+    loan = calculateLoan(parseInt(loanValues.amount), parseInt(loanValues.term), parseFloat(loanValues.rate));
+  }
   
   // after calculation function - the returned array is used as the parameter
   // in the diplay function
@@ -121,7 +135,7 @@ function displayLoanTable(loanArray) {
 function validateInputs(amount, term, rate) {
   // check if our parsed inputs are negative or non-integers
   // if invalid, create an error alert asking for valid inputs
-  if (isNaN(parseInt(amount)) || Math.sign(parseInt(amount)) == -1) {
+  if (isNaN(parseInt(amount)) || Math.sign(parseInt(amount)) == -1 || isNaN(parseInt(term)) ||isNaN(parseFloat(rate))) {
     Swal.fire(
           {
           icon: 'error',
@@ -130,7 +144,9 @@ function validateInputs(amount, term, rate) {
         }
       )
   }
-  else if (isNaN(parseInt(term)) || Math.sign(parseInt(term)) == -1) {
+  
+  if (Math.sign(parseInt(term)) != 1) {
+    term = "";
     Swal.fire(
           {
           icon: 'error',
@@ -139,7 +155,9 @@ function validateInputs(amount, term, rate) {
         }
         )
   }
-  else if (isNaN(parseFloat(rate)) || Math.sign(parseFloat(rate)) == -1) {
+  
+  if (Math.sign(parseFloat(rate)) != 1) {
+    rate = "";
     Swal.fire(
           {
           icon: 'error',
@@ -148,12 +166,15 @@ function validateInputs(amount, term, rate) {
         }
         )
   }
-  // if valid, return the inputs provided
-  else {
-    return amount, term, rate;
-    // amount = parseInt(amount);
-    // term = parseInt(term);
-    // rate = parseFloat(rate);
-    // calculateLoan(amount, term, rate);
-  } 
+  
+   // if valid, return the inputs provided
+    let loanInfo = {
+      amount: amount,
+      term: term,
+      rate: rate
+    };
+
+    return loanInfo;
+    
+  
 }
