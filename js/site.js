@@ -6,15 +6,12 @@ function getValues() {
   let loanRateInput = document.querySelector('#loanRateInput').value;
   // function validate user inputs ran immediately after receiving inputs
   let loanValues = validateInputs(loanAmountInput, loanTermInput, loanRateInput);
-  // validated inputs are then parsed into numbers to be used 
-  // as parameters for calculate function
-  // let amount = parseInt(loanAmountInput);
-  // let term = parseInt(loanTermInput);
-  // let rate = parseFloat(loanRateInput);
-  let loan;
   
   // create a value to hold the array returned in the calculate function
   // will be used as the parameter in the display function
+  let loan;
+
+  // if any inputs are invalid, an alert is fired requesting valid information for calculation
   if (loanValues.amount == "" || loanValues.term == "" || loanValues.rate == "") {
     Swal.fire(
       {
@@ -26,6 +23,8 @@ function getValues() {
     
   }
   else {
+    // validated inputs are then parsed into numbers to be used 
+    // as parameters for calculate function
     loan = calculateLoan(parseInt(loanValues.amount), parseInt(loanValues.term), parseFloat(loanValues.rate));
   }
   
