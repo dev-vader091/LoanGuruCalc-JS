@@ -9,25 +9,8 @@ function getValues() {
   
   // create a value to hold the array returned in the calculate function
   // will be used as the parameter in the display function
-  let loan;
+  let loan = calculateLoan(parseInt(loanValues.amount), parseInt(loanValues.term), parseFloat(loanValues.rate));
 
-  // if any inputs are invalid, an alert is fired requesting valid information for calculation
-  if (loanValues.amount == "" || loanValues.term == "" || loanValues.rate == "") {
-    Swal.fire(
-      {
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Please enter a valid loan info.',
-    }
-    )
-    
-  }
-  else {
-    // validated inputs are then parsed into numbers to be used 
-    // as parameters for calculate function
-    loan = calculateLoan(parseInt(loanValues.amount), parseInt(loanValues.term), parseFloat(loanValues.rate));
-  }
-  
   // after calculation function - the returned array is used as the parameter
   // in the diplay function
   displayLoanTable(loan);
@@ -132,47 +115,47 @@ function displayLoanTable(loanArray) {
 
 // validation function
 function validateInputs(amount, term, rate) {
-  // check if our parsed inputs are negative or non-integers
+  let loanInfo;
+  // check if our parsed inputs are negative or non-integers or empty
   // if invalid, create an error alert asking for valid inputs
-  if (isNaN(parseInt(amount)) || Math.sign(parseInt(amount)) == -1 || isNaN(parseInt(term)) ||isNaN(parseFloat(rate))) {
+  if (isNaN(parseInt(amount)) || Math.sign(parseInt(amount)) != 1 || amount == "") {
     Swal.fire(
           {
           icon: 'error',
           title: 'Oops...',
-          text: 'Please enter a valid loan amount.',
+          text: 'Please enter a valid loan amount.'
         }
       )
   }
-  
-  if (Math.sign(parseInt(term)) != 1) {
-    term = "";
+  else if (isNaN(parseInt(term)) || Math.sign(parseInt(term)) != 1 || term == "") {
     Swal.fire(
-          {
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Please enter valid loan term.',
-        }
-        )
+      {
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please enter a valid loan term.'
+    }
+  )
   }
-  
-  if (Math.sign(parseFloat(rate)) != 1) {
-    rate = "";
+  else if (isNaN(parseInt(rate)) || Math.sign(parseFloat(rate)) != 1 || rate == "") {
     Swal.fire(
-          {
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Please enter a valid loan interest rate.',
-        }
-        )
+      {
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please enter a valid loan rate.'
+    }
+  )
   }
-  
-   // if valid, return the inputs provided
-    let loanInfo = {
+  // if valid, initialize object to hold inputs
+  else
+    {
+      loanInfo = {
       amount: amount,
       term: term,
       rate: rate
     };
+  }
 
+  // return object 
     return loanInfo;
     
   
